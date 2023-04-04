@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+
+</head>
+<body>
+    <h2>Responsive Table</h2>
+    <div class="table-wrapper">
+        <table id="customer_table" class="fl-table">
+            <thead>
+                <tr>
+                    <th scope="col">Görsel</th>
+                    <th scope="col">Stok kodu</th>
+                    <th scope="col">Stok adı</th>
+                    <th scope="col">Marka</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Liste Fiyatı</th>
+                    <th scope="col">Nakit İskontosu</th>
+                    <th scope="col">Tek Çekim İskontosu</th>
+                    <th scope="col">6 Taksit İskontosu</th>
+                    <th scope="col">Açık Hesap İskontosu</th>
+                    <th scope="col">Miktar</th>
+                    <th scope="col">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ProductDetail" tabindex="-1" role="dialog" aria-labelledby="ProductDetailTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:blueviolet">
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:white">Ürün Detay</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ürün Adı:</label>
+                            <input type="text" class="form-control" id="product-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ürün Fiyat:</label>
+                            <input type="text" class="form-control" id="product-price">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ürün Kategori:</label>
+                            <input type="text" class="form-control" id="product-category">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-outline-secondary">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var tboby = $('#customer_table');
+
+        var data = [];
+
+        var fdata = [
+            {
+                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ_namBvlnlXK07VQQwjDMex9sFDgaeKpxK_HeLsKJ2sddZnA8cbpvsIJSpQyDA0CAHhg&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
+            "StockCode": "StokKodu 1",
+            "StockName": "Ürün 1",
+            "Brand": "Marka 1",
+            "Stock": "Stock 1",
+            "ListPrice": "Price 1",
+            "CashDiscount": "% 50",
+                "OneShotDiscount": "%50",
+                "SixInstallmentsDiscount": "%50",
+                "OpenAccountDiscount": "%50",
+                "Count":   "10"
+            },
+            {
+                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvHf1Tmmzgu6P6I7Y28oBwW45CJlIQ0HcdSZf2NQomoyO3zgYB1YAjJfvvCNJiNBhQsiI&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
+                "StockCode": "StokKodu 2",
+                "StockName": "Ürün 2",
+                "Brand": "Marka 2",
+                "Stock": "Stock 2",
+                "ListPrice": "Price 2",
+                "CashDiscount": "% 50",
+                "OneShotDiscount": "%50",
+                "SixInstallmentsDiscount": "%50",
+                "OpenAccountDiscount": "%50",
+                "Count": "10"
+            },
+            { 
+                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm6jyTX3za9h41aWJu6ec5D7joUpt3KX0nMmwffZq-JSDOfjtSQ9B16BzHt0CZILuBpc4&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
+                "StockCode": "StokKodu 3",
+            "StockName": "Ürün 3",
+            "Brand": "Marka 3",
+            "Stock": "Stock 3",
+            "ListPrice": "Price 3",
+            "CashDiscount": "% 50",
+                "OneShotDiscount": "%50",
+                "SixInstallmentsDiscount": "%50",
+                "OpenAccountDiscount": "%50",
+                "Count":   "10"
+            },
+            {
+                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd29BwkHOo8D6ThqI0dIkQzkoFJIC497oehESlGs_M6_JMJlE-2NolkyZDfvztGiy1CEk&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
+                "StockCode": "StokKodu 4",
+                "StockName": "Ürün 4",
+                "Brand": "Marka 4",
+                "Stock": "Stock 4",
+                "ListPrice": "Price 4",
+                "CashDiscount": "% 50",
+                "OneShotDiscount": "%50",
+                "SixInstallmentsDiscount": "%50",
+                "OpenAccountDiscount": "%50",
+                "Count": "10"
+            },
+            {
+                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDpmli7FfuaEUiPoLqHrv0KLkXokKUWqQ3ez81NMqFWYJ61_1sYGHBFNeRdoQDAscR-C0&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
+                "StockCode": "StokKodu 5",
+                "StockName": "Ürün 5",
+                "Brand": "Marka 5",
+                "Stock": "Stock 5",
+                "ListPrice": "Price 5",
+                "CashDiscount": "% 50",
+                "OneShotDiscount": "%50",
+                "SixInstallmentsDiscount": "%50",
+                "OpenAccountDiscount": "%50",
+                "Count": "10"
+            }
+           ];
+
+        function make_base_auth(user, password) {
+            var tok = user + ':' + password;
+            var hash = btoa(tok);
+            return "Basic " + hash;
+        }
+        $.ajax
+            ({
+                type: "GET",
+                url: "https://api.akilliticaretim.com/api/Product/ListProducts/1",
+                dataType: 'json',
+                async: false,
+                data: '{}',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', make_base_auth("assessment@akilliticaret.com", "123456"));
+                    xhr.setRequestHeader("GUID", "5252-C88C-2911-DBF8")
+                },
+                success: function (d, s) {
+                    data = d;
+                    $(fdata).each(function () {
+                        var tr = $('<tr></tr>')
+                        tr.append('<td>' + this.Image + '</td>')
+                        tr.append('<td><b>' + this.StockCode + '</b></td>')
+                        tr.append('<td id="stock_name" >' + this.StockName + '</td>')
+                        tr.append('<td  id="category" >' + this.Brand + '</td>')
+                        tr.append('<td>' + this.Stock + '</td>')
+                        tr.append('<td id="list_price" >' + this.ListPrice + '</td>')
+                        tr.append('<td>' + this.CashDiscount + '</td>')
+                        tr.append('<td>' + this.OneShotDiscount + '</td>')
+                        tr.append('<td>' + this.SixInstallmentsDiscount + '</td>')
+                        tr.append('<td>' + this.OpenAccountDiscount + '</td>')
+                        tr.append('<td>' + this.Count + '</td>')
+                        tr.append('<td><button type="button" onclick="getMyDom(this)" id="product_detal_button" class="btn btn-success" data-toggle="modal" data-target="#ProductDetail">Ürün Detayı</button></td>')
+                        tboby.append(tr);
+                    });
+                }
+            });
+        function getMyDom(element) {
+            var stock_name = $(element).closest("tr")
+                .find("#stock_name")
+                .text();
+            var list_price = $(element).closest("tr")
+                .find("#list_price")
+                .text();
+            var category = $(element).closest("tr")
+                .find("#category")
+                .text();
+            $("#product-name").attr("placeholder", stock_name);
+            $("#product-price").attr("placeholder", list_price);
+            $("#product-category").attr("placeholder", category);
+        }
+
+    </script>
+</body>
+</html>
+
