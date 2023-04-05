@@ -74,84 +74,15 @@
         var tboby = $('#customer_table');
 
         var data = [];
-
-        var fdata = [
-            {
-                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ_namBvlnlXK07VQQwjDMex9sFDgaeKpxK_HeLsKJ2sddZnA8cbpvsIJSpQyDA0CAHhg&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
-            "StockCode": "StokKodu 1",
-            "StockName": "Ürün 1",
-            "Brand": "Marka 1",
-            "Stock": "Stock 1",
-            "ListPrice": "Price 1",
-            "CashDiscount": "% 50",
-                "OneShotDiscount": "%50",
-                "SixInstallmentsDiscount": "%50",
-                "OpenAccountDiscount": "%50",
-                "Count":   "10"
-            },
-            {
-                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvHf1Tmmzgu6P6I7Y28oBwW45CJlIQ0HcdSZf2NQomoyO3zgYB1YAjJfvvCNJiNBhQsiI&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
-                "StockCode": "StokKodu 2",
-                "StockName": "Ürün 2",
-                "Brand": "Marka 2",
-                "Stock": "Stock 2",
-                "ListPrice": "Price 2",
-                "CashDiscount": "% 50",
-                "OneShotDiscount": "%50",
-                "SixInstallmentsDiscount": "%50",
-                "OpenAccountDiscount": "%50",
-                "Count": "10"
-            },
-            { 
-                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm6jyTX3za9h41aWJu6ec5D7joUpt3KX0nMmwffZq-JSDOfjtSQ9B16BzHt0CZILuBpc4&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
-                "StockCode": "StokKodu 3",
-            "StockName": "Ürün 3",
-            "Brand": "Marka 3",
-            "Stock": "Stock 3",
-            "ListPrice": "Price 3",
-            "CashDiscount": "% 50",
-                "OneShotDiscount": "%50",
-                "SixInstallmentsDiscount": "%50",
-                "OpenAccountDiscount": "%50",
-                "Count":   "10"
-            },
-            {
-                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd29BwkHOo8D6ThqI0dIkQzkoFJIC497oehESlGs_M6_JMJlE-2NolkyZDfvztGiy1CEk&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
-                "StockCode": "StokKodu 4",
-                "StockName": "Ürün 4",
-                "Brand": "Marka 4",
-                "Stock": "Stock 4",
-                "ListPrice": "Price 4",
-                "CashDiscount": "% 50",
-                "OneShotDiscount": "%50",
-                "SixInstallmentsDiscount": "%50",
-                "OpenAccountDiscount": "%50",
-                "Count": "10"
-            },
-            {
-                "Image": '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDpmli7FfuaEUiPoLqHrv0KLkXokKUWqQ3ez81NMqFWYJ61_1sYGHBFNeRdoQDAscR-C0&usqp=CAU" alt="Girl in a jacket" width="24" height="24">',
-                "StockCode": "StokKodu 5",
-                "StockName": "Ürün 5",
-                "Brand": "Marka 5",
-                "Stock": "Stock 5",
-                "ListPrice": "Price 5",
-                "CashDiscount": "% 50",
-                "OneShotDiscount": "%50",
-                "SixInstallmentsDiscount": "%50",
-                "OpenAccountDiscount": "%50",
-                "Count": "10"
-            }
-           ];
-
         function make_base_auth(user, password) {
             var tok = user + ':' + password;
             var hash = btoa(tok);
-            return "Basic " + hash;
+            return "Basic " + hash; 
         }
         $.ajax
             ({
                 type: "GET",
-                url: "https://api.akilliticaretim.com/api/Product/ListProducts/1",
+                url: "https://api.akilliticaretim.com/api/Product/ListProducts/0",
                 dataType: 'json',
                 async: false,
                 data: '{}',
@@ -159,21 +90,21 @@
                     xhr.setRequestHeader('Authorization', make_base_auth("assessment@akilliticaret.com", "123456"));
                     xhr.setRequestHeader("GUID", "5252-C88C-2911-DBF8")
                 },
-                success: function (d, s) {
-                    data = d;
-                    $(fdata).each(function () {
+                success: function (data, s) {
+                    console.log(s)
+                    $(data["data"]).each(function () {
                         var tr = $('<tr></tr>')
-                        tr.append('<td>' + this.Image + '</td>')
-                        tr.append('<td><b>' + this.StockCode + '</b></td>')
-                        tr.append('<td id="stock_name" >' + this.StockName + '</td>')
-                        tr.append('<td  id="category" >' + this.Brand + '</td>')
-                        tr.append('<td>' + this.Stock + '</td>')
-                        tr.append('<td id="list_price" >' + this.ListPrice + '</td>')
-                        tr.append('<td>' + this.CashDiscount + '</td>')
-                        tr.append('<td>' + this.OneShotDiscount + '</td>')
-                        tr.append('<td>' + this.SixInstallmentsDiscount + '</td>')
-                        tr.append('<td>' + this.OpenAccountDiscount + '</td>')
-                        tr.append('<td>' + this.Count + '</td>')
+                        tr.append('<td>' + this.prodImages + '</td>')
+                        tr.append('<td><b>' + this.stockCode + '</b></td>')
+                        tr.append('<td id="stock_name" >' + this.name + '</td>')
+                        tr.append('<td  id="category" >' + this.stockType + '</td>')
+                        tr.append('<td>' + this.stock + '</td>')
+                        tr.append('<td id="list_price" >' + this.price + '</td>')
+                        tr.append('<td>' + this.discountRate + '</td>')
+                        tr.append('<td>' + this.maxSaleUnit + '</td>')
+                        tr.append('<td>' + this.minSaleUnit + '</td>')
+                        tr.append('<td>' + this.unitIncrement + '</td>')
+                        tr.append('<td>' + this.inCartQty + '</td>')
                         tr.append('<td><button type="button" onclick="getMyDom(this)" id="product_detal_button" class="btn btn-success" data-toggle="modal" data-target="#ProductDetail">Ürün Detayı</button></td>')
                         tboby.append(tr);
                     });
